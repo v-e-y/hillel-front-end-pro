@@ -11,11 +11,13 @@ function validateNumber(value) {
 
 /**
  * Validate year
- * @param {Number|String} value - Value to validate
+ * @param {Number} value - Value to validate
  * @returns {Boolean} - Is valid year
  */
 function validateYear(value) {
-    return value >= 1900 && value <= 2024;
+    return typeof value === 'number'
+        ? value >= 1900 && value <= 2024
+        : false;
 }
 
 /**
@@ -33,7 +35,7 @@ function parseNumber(value) {
  * @returns {Boolean} - Is valid string
  */
 function validateString(value) {
-    return typeof value === 'string' && value.length > 0;
+    return typeof value === 'string' && value.length > 2;
 }
 
 /**
