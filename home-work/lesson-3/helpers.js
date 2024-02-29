@@ -11,13 +11,15 @@ function validateNumber(value) {
 
 /**
  * Validate year
- * @param {Number} value - Value to validate
+ * @param {Number|String} value - Value to validate
  * @returns {Boolean} - Is valid year
  */
 function validateYear(value) {
-    return typeof value === 'number'
-        ? value >= 1900 && value <= 2024
-        : false;
+    if (! typeof value !== 'number') {
+        value = parseNumber(value);
+    }
+
+    return value >= 1900 && value <= 2024;
 }
 
 /**
@@ -26,7 +28,7 @@ function validateYear(value) {
  * @returns {Number} - Parsed number
  */
 function parseNumber(value) {
-    return parseInt(value, 10);
+    return parseInt(value);
 }
 
 /**
@@ -66,5 +68,5 @@ function resolveFavoriteSportMessage(sport) {
 
     return knownSport
         ? `Awesome! You want to play in ${sports[knownSport]}`
-        : null
+        : 'You choose unknown for as a type of sport';
 }
