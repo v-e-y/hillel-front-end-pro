@@ -15,7 +15,7 @@ function validateNumber(value) {
  * @returns {Boolean} - Is valid year
  */
 function validateYear(value) {
-    if (! typeof value !== 'number') {
+    if (typeof value !== 'number') {
         value = parseNumber(value);
     }
 
