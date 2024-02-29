@@ -88,24 +88,18 @@ async function fillUser() {
 }
 
 function showFinalMessage() {
-    /** @const {Object} finalMessage */
-    const finalMessage = {
-        birthYear: null,
-        livingCity: null,
-        favoriteSport: null
-    };
+    /** @var string message */
+    let message = '';
 
     fillUser().then(() => {
-        finalMessage.birthYear = user.birthYear !== null ? `You were born in ${user.birthYear}` : null;
-        finalMessage.livingCity = resolvePlaceMessage(user.livingCity);
-        finalMessage.favoriteSport = resolveFavoriteSportMessage(user.favoriteSport);
+        if (user.birthYear !== null) message += `You were born in ${user.birthYear}`;
+        if (user.livingCity !== null) message += '\n' + resolvePlaceMessage(user.livingCity);
+        if (user.favoriteSport !== null) message += '\n' + resolveFavoriteSportMessage(user.favoriteSport);
 
         alert(
-            `
-            ${finalMessage.birthYear}
-            ${finalMessage.livingCity}
-            ${finalMessage.favoriteSport}
-            `
+            message === ''
+                ? 'You did not answer any question'
+                : message
         );
     });
 }
