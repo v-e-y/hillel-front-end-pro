@@ -20,7 +20,7 @@ const questions = {
  * @property {String} capital - Capital name
  */
 const countries = {
-    Ukraine: 'yiv',
+    Ukraine: 'Kyiv',
     USA: 'Washington',
     England: 'London',
 };
