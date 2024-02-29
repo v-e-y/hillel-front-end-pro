@@ -65,7 +65,7 @@ async function fillUser() {
     askQuestion(
         (answer) => {user.birthYear = answer}, 
         questions.birthYear,
-        [parseNumber, validateYear],
+        [validateNumber, validateYear],
         () => alert('It is a pity that you did not want to enter your birth year'),
         [parseNumber]
     );
