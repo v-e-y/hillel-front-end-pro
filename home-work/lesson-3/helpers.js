@@ -49,7 +49,6 @@ function resolvePlaceMessage(city) {
     const country = Object.keys(countries).find(
         (country) => countries[country].toLowerCase() === city.toLowerCase()
     );
-    // console.log('country', country);
 
     return country
         ? `You live in capital of ${country}`
@@ -62,11 +61,7 @@ function resolvePlaceMessage(city) {
  * @returns {String} - Message
  */
 function resolveFavoriteSportMessage(sport) {
-    const knownSport = Object.keys(sports).find(
-        (knownSport) => knownSport.toLowerCase() === sport.toLowerCase()
-    );
-
-    return knownSport
-        ? `Awesome! You want to play in ${sports[knownSport]}`
+    return sports[sport.toLowerCase()]
+        ? `Awesome! You want to play in ${sports[sport.toLowerCase()]}`
         : 'You choose unknown for as a type of sport';
 }

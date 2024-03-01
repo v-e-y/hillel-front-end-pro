@@ -18,7 +18,7 @@ const user = {
  * Ask question
  * @param {Function} receiver - Receiver function
  * @param {String} question - Question to ask
- * @param {Function|Array} validator - Validator function
+ * @param {Array<Function>} validator - Validator functions
  * @param {Function} declineToAnswer - Decline to answer resolver
  * @param {Array<Function>|null} middleware - Middleware functions
  * @returns {void}
@@ -32,15 +32,11 @@ function askQuestion(
 ) {
     let answer = prompt(question);
 
-    if (answer === null) {
+    if (!answer) {
         return declineToAnswer();
     }
 
-    if (typeof validator === 'function' && !validator(answer)) {
-        return askQuestion(...arguments);
-    }
-
-    if (typeof validator === 'object') {
+    if (Array.isArray(validator)) {
         for (let i = 0; i < validator.length; i++) {
             if (!validator[i](answer)) {
                 return askQuestion(...arguments);
@@ -48,7 +44,7 @@ function askQuestion(
         }
     }
 
-    if (middleware !== null) {
+    if (middleware) {
         for (let i = 0; i < middleware.length; i++) {
             answer = middleware[i](answer);
         }
@@ -61,7 +57,7 @@ function askQuestion(
  * Fill User entity
  * @returns {Boolean} - Is filled
  */
-async function fillUser() {
+function fillUser() {
     askQuestion(
         (answer) => {user.birthYear = answer}, 
         questions.birthYear,
@@ -73,35 +69,27 @@ async function fillUser() {
     askQuestion(
         (answer) => {user.livingCity = answer}, 
         questions.livingCity,
-        validateString,
+        [validateString],
         () => alert('It is a pity that you did not want to enter your living city')
     );
 
     askQuestion(
         (answer) => {user.favoriteSport = answer}, 
         questions.favoriteSport,
-        validateString,
+        [validateString],
         () => alert('It is a pity that you did not want to enter your favorite sport')
     );
 
     return true;
 }
 
-function showFinalMessage() {
+if (fillUser()) {
     /** @var string message */
     let message = '';
 
-    fillUser().then(() => {
-        if (user.birthYear !== null) message += `You were born in ${user.birthYear}`;
-        if (user.livingCity !== null) message += '\n' + resolvePlaceMessage(user.livingCity);
-        if (user.favoriteSport !== null) message += '\n' + resolveFavoriteSportMessage(user.favoriteSport);
+    if (user.birthYear !== null) message += `You were born in ${user.birthYear}`;
+    if (user.livingCity !== null) message += '\n' + resolvePlaceMessage(user.livingCity);
+    if (user.favoriteSport !== null) message += '\n' + resolveFavoriteSportMessage(user.favoriteSport);
 
-        alert(
-            message === ''
-                ? 'You did not answer any question'
-                : message
-        );
-    });
+    alert(message || 'You did not answer any question');
 }
-
-showFinalMessage();
