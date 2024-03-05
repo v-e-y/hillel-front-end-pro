@@ -12,7 +12,8 @@ for (let i = 20; i <= 30; i += 0.5) {
 
 /**
  * TASK 2
- * Один долар коштує 27 гривень. Вивести дані з розрахунком вартості 10, 20, 30... 100 доларів.
+ * Один долар коштує 27 гривень. 
+ * Вивести дані з розрахунком вартості 10, 20, 30... 100 доларів.
  */
 
 const dollarCourse = 27;
@@ -29,13 +30,13 @@ for (let i = 10; i <= 100; i += 10) {
  * Вивести всі цілі числа від 1 до 100, квадрат яких не перевищує числа N.
  */
 
-/** @const {Number} N - Random number */
-const N = 100;
+/** @const {Number} task3Number - Random number */
+const task3Number = Math.floor(Math.random() * 100);
 
 console.log('Task 3:');
 
 for (let i = 1; i <= 100; i++) {
-    if (i ** 2 <= N) {
+    if (i ** 2 <= task3Number) {
         console.log(i);
     }
 }
