@@ -14,9 +14,17 @@ function getValuesByCondition(dataResource, propName, condition) {
 }
 
 console.log(
+    'Top clients phones:',
     getValuesByCondition(
         dataSet,
         'phone',
         (item) => Number(item.balance.replace(/[^0-9\.-]+/g,"")) > 2000
+    )
+);
+
+console.log(
+    'Sum of users balances:',
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+        dataSet.reduce((acc, item) => acc + Number(item.balance.replace(/[^0-9\.-]+/g,"")), 0)
     )
 );
