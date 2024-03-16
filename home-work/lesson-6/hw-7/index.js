@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @const {Array} dataSet
+ * @const {Array<Number>} dataSet
  */
 const dataSet = [1, 2, 3, 4, 5, 6, 7];
 
@@ -18,7 +18,7 @@ function removeElement(arr, value) {
         || typeof value !== 'number'
         || !arr.includes(value)
     ) {
-        throw new Error('Value is not a number');
+        throw new Error('Invalid properties!');
     }
 
     return arr.filter((item) => item !== value);
