@@ -9,7 +9,7 @@ function summarizer(number) {
     /** @var {Number} result */
     let result = 0;
 
-    return (number) => result += number;
+    return number => result += number;
 }
 
 const sum = summarizer();
